@@ -2,6 +2,7 @@ Models/bin/Debug/*.pdb
 Models/bin/Release
 Models/obj
 SalesSystem/bin/Debug/*.pdb
+SalesSystem/bin/Debug/*.exe
 SalesSystem/bin/Release
 SalesSystem/obj
 SalesSystem/TestResults
