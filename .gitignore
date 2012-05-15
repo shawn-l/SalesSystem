@@ -1,7 +1,10 @@
-Models/bin
+Models/bin/Debug/*.pdb
+Models/bin/Release
 Models/obj
-SalesSystem/bin
+SalesSystem/bin/Debug/*.pdb
+SalesSystem/bin/Release
 SalesSystem/obj
 SalesSystem/TestResults
-SalesSystemTest/bin
+SalesSystemTest/bin/Debug/*.pdb
+SalesSystemTest/bin/Release
 SalesSystemTest/obj
