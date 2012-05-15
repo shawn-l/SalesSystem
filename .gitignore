@@ -1,11 +1,14 @@
 Models/bin/Debug/*.pdb
+Models/bin/Debug/*.xml
 Models/bin/Release
 Models/obj
 SalesSystem/bin/Debug/*.pdb
 SalesSystem/bin/Debug/*.exe
+SalesSystem/bin/Debug/*.xml
 SalesSystem/bin/Release
 SalesSystem/obj
 SalesSystem/TestResults
 SalesSystemTest/bin/Debug/*.pdb
+SalesSystemTest/bin/Debug/*.xml
 SalesSystemTest/bin/Release
 SalesSystemTest/obj
