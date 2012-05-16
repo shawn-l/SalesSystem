@@ -60,20 +60,28 @@ namespace SalesSystemTest
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestCRUDAboutProudctModel()
         {
             //
             // TODO: 在此处添加测试逻辑
             //
             DbAccessor accessor = DbAccessor.Instance;
-            Product product = new Product { Id = 1, Name = "汽水", Price = 3.5, Quantity = 100 };
-            accessor.CreateProduct(product,product.Id);
-            Product dbProudct = accessor.GetProductById(1);
+            Product product = new Product { Id = 0, Name = "汽水", Price = 3.5, Quantity = 100 };
+            accessor.CreateProduct(product);
+            Product dbProduct = accessor.GetProductById(product.Id);
             
-            Assert.AreEqual(product.Id, dbProudct.Id);
-            Assert.AreEqual(product.Name, dbProudct.Name);
-            Assert.AreEqual(product.Price, dbProudct.Price);
-            Assert.AreEqual(product.Quantity, dbProudct.Quantity);
+            Assert.AreEqual(product.Id, dbProduct.Id);
+            Assert.AreEqual(product.Name, dbProduct.Name);
+            Assert.AreEqual(product.Price, dbProduct.Price);
+            Assert.AreEqual(product.Quantity, dbProduct.Quantity);
+
+            product.Name = "饼干";
+            accessor.UpdateProduct(product);
+            dbProduct = accessor.GetProductById(product.Id);
+            Assert.AreEqual(dbProduct.Name, product.Name);
+
+            accessor.DeleteProduct(product);
+            Assert.AreEqual(null, accessor.GetProductById(product.Id));
         }
     }
 }

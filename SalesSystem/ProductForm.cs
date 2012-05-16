@@ -27,7 +27,7 @@ namespace SalesSystem
                 Quantity = Int32.Parse(insertQuantity.Text)
             };
             DbAccessor accessor = DbAccessor.Instance;
-            accessor.CreateProduct(product, product.Id);
+            accessor.CreateProduct(product);
         }
 
         private void search_Click(object sender, EventArgs e)

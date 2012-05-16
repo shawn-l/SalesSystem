@@ -25,14 +25,63 @@ namespace Models
             }
         }
 
-        public void CreateProduct(Product product, int productId)
+        public void CreateProduct(Product product/*, int productId*/)
         {
-            session.Save(product, productId);
-            session.Flush();
+            using (ITransaction tx = session.BeginTransaction())
+            {
+                try
+                {
+                    session.Save(product);
+                    session.Flush();
+                    tx.Commit();
+                }
+                catch (HibernateException)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
         }
+
         public Product GetProductById(int productId)
         {
             return session.Get<Product>(productId);
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            using (ITransaction tx = session.BeginTransaction())
+            {
+                try
+                {
+                    session.Update(product);
+                    session.Flush();
+                    tx.Commit();
+                }
+                catch (HibernateException)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            using (ITransaction tx = session.BeginTransaction())
+            {
+                try
+                {
+                    session.Delete(product);
+                    session.Flush();
+                    tx.Commit();
+                }
+                catch (HibernateException)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
         }
     }
 }
