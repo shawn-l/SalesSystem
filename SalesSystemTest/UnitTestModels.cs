@@ -67,7 +67,7 @@ namespace SalesSystemTest
             //
             DbAccessor accessor = DbAccessor.Instance;
             Product product = new Product { Id = 0, Name = "汽水", Price = 3.5, Quantity = 100 };
-            accessor.CreateProduct(product);
+            accessor.Create(product);
             Product dbProduct = accessor.GetProductById(product.Id);
             
             Assert.AreEqual(product.Id, dbProduct.Id);
@@ -83,5 +83,26 @@ namespace SalesSystemTest
             accessor.DeleteProduct(product);
             Assert.AreEqual(null, accessor.GetProductById(product.Id));
         }
+        [TestMethod]
+        public void TestCRUDAboutSupplierModel()
+        {
+            //
+            // TODO: 在此处添加测试逻辑
+            //
+            DbAccessor accessor = DbAccessor.Instance;
+            Supplier supplier= new Supplier { name = "珠海汽水公司" };
+            accessor.Create(supplier);
+         
+           
+        }
+        [TestMethod]
+        public void TestCRUDAboutPurchaseListModel() {
+            DbAccessor accessor = DbAccessor.Instance;
+            Product product = accessor.GetProductById(2);
+            Supplier supplier = accessor.GetSupplierById(7);
+            Purchase_List purchase = new Purchase_List { quantity = 100, price = 10.5, product_id = product.Id, supplier_id = supplier.id };
+            accessor.Create(purchase);
+        }
+
     }
 }

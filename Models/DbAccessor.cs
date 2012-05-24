@@ -25,7 +25,7 @@ namespace Models
             }
         }
 
-        public void CreateProduct(Product product/*, int productId*/)
+        public void Create(Object product)
         {
             using (ITransaction tx = session.BeginTransaction())
             {
@@ -46,6 +46,10 @@ namespace Models
         public Product GetProductById(int productId)
         {
             return session.Get<Product>(productId);
+        }
+        public Supplier GetSupplierById(int supplierId)
+        {
+            return session.Get<Supplier>(supplierId);
         }
 
         public void UpdateProduct(Product product)
