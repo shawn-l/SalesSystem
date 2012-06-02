@@ -6,5 +6,6 @@
 	<class name ="Supplier" table="suppliers">
 		<id name="id" ></id>
 		<property name ="name"/>
+
 	</class>
 </hibernate-mapping>

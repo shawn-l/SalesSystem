@@ -4,11 +4,10 @@
    namespace="Models">
 
 	<class name ="Product">
-		<id name="Id" column="Id">
-			
-		</id>
+		<id name="Id" column="Id"></id>
 		<property name ="Name"/>
 		<property name ="Price"/>
 		<property name="Quantity" />
+	
 	</class>
 </hibernate-mapping>

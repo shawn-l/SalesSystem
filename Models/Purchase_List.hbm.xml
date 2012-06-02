@@ -3,7 +3,7 @@
    assembly="Models"
    namespace="Models">
 
-	<class name ="Purchase_List" table ="purchase_lists">
+	<class name ="PurchaseList" table ="purchase_lists">
 		<id name="id" >
 
 		</id>
@@ -11,5 +11,6 @@
 		<property name ="price"/>
 		<property name="product_id" />
 		<property name ="supplier_id" />
+	
 	</class>
 </hibernate-mapping>
