@@ -82,7 +82,7 @@ namespace SalesSystemTest
             Assert.AreEqual(null, accessor.GetProductById(product.Id));
 
             IList<Product> productList = accessor.GetAllProduct();
-            Assert.AreEqual(1, productList.Count);
+            Assert.AreEqual(3, productList.Count);
         }
         [TestMethod]
         public void TestCRUDAboutSupplierModel()
@@ -106,7 +106,7 @@ namespace SalesSystemTest
             Assert.AreEqual(null, accessor.GetSupplierById(supplier.id));
 
             IList<Supplier> supplierList = accessor.GetAllSupplier();
-            Assert.AreEqual(1, supplierList.Count);
+            Assert.AreEqual(3, supplierList.Count);
            
         }
         [TestMethod]
@@ -135,6 +135,32 @@ namespace SalesSystemTest
             accessor.DeleteSupplier(supplier);
    
         }
+        [TestMethod]
+        public void TestCRUDAbouSaleModel()
+        {
+            DbAccessor accessor = DbAccessor.Instance;
+
+            Product product = new Product { Id = 0, Name = "汽水", Price = 3.5, Quantity = 100 };
+            accessor.CreateProduct(product);
+
+            Supplier supplier = new Supplier { id = 0, name = "珠海汽水公司" };
+            accessor.CreateSupplier(supplier);
+
+            SaleList sale = new SaleList { id = 0, salequantity = 5, product_id = product.Id };
+            accessor.CreateSaleList(sale);
+
+            SaleList dbSale_list = accessor.GetSaleListById(0);
+            Product dbProduct = accessor.GetProductById(0);
+
+            Assert.AreEqual(5, dbSale_list.salequantity);
+            Assert.AreEqual(dbProduct.Id, dbSale_list.product_id);
+
+            Assert.AreEqual(95, dbProduct.Quantity);
+
+            accessor.DeleteProduct(product);
+            accessor.DeleteSupplier(supplier);
+        }
+
 
     }
 }

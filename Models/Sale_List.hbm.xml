@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+   assembly="Models"
+   namespace="Models">
+
+  <class name ="SaleList" table ="sale_lists">
+    <id name="id" >
+
+    </id>
+    <property name ="salequantity"/>
+    <property name ="product_id"/>
+  </class>
+</hibernate-mapping>

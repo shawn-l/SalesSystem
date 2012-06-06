@@ -82,6 +82,28 @@ namespace Models
                 }
             }
         }
+        public void CreateSaleList(SaleList sale_list)
+        {
+            using (ITransaction tx = session.BeginTransaction())
+            {
+                try
+                {
+                    session.Save(sale_list);
+
+                    Product product = session.Get<Product>(sale_list.product_id);
+                    product.Quantity -= sale_list.salequantity;
+                    session.Update(product);
+
+                    session.Flush();
+                    tx.Commit();
+                }
+                catch (HibernateException)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
+        }
 
         public Product GetProductById(int productId)
         {
@@ -102,6 +124,10 @@ namespace Models
         public PurchaseList GetPurchaseListById(int purchaseId)
         {
             return session.Get<PurchaseList>(purchaseId);
+        }
+        public SaleList GetSaleListById(int saleId)
+        {
+            return session.Get<SaleList>(saleId);
         }
 
         public void UpdateProduct(Product product)
@@ -190,5 +216,27 @@ namespace Models
                 }
             }
         }
+
+        public void DeleteSale(SaleList sale_list)
+        {
+            using (ITransaction tx = session.BeginTransaction())
+            {
+                try
+                {
+                    session.Delete(sale_list);
+                    session.Flush();
+                    tx.Commit();
+                }
+                catch (HibernateException)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
+        }
+
+
+
+
     }
 }
