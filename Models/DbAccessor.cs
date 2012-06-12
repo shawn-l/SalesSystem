@@ -69,7 +69,7 @@ namespace Models
                     session.Save(purchase_list);
 
                     Product product = session.Get<Product>(purchase_list.product_id);
-                    product.Quantity += purchase_list.quantity;
+                    product.stock += purchase_list.quantity;
                     session.Update(product);
 
                     session.Flush();
@@ -91,7 +91,9 @@ namespace Models
                     session.Save(sale_list);
 
                     Product product = session.Get<Product>(sale_list.product_id);
-                    product.Quantity -= sale_list.salequantity;
+                    product.stock -= sale_list.salequantity;
+                    product.sale_quantity += sale_list.salequantity;
+                    product.amount += sale_list.salequantity * product.price;
                     session.Update(product);
 
                     session.Flush();

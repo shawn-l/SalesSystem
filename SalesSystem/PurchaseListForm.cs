@@ -20,7 +20,7 @@ namespace SalesSystem
             ArrayList productNames = new ArrayList();
             ArrayList supplierNames = new ArrayList();
             foreach (Product product in accessor.GetAllProduct())
-                productNames.Add(product.Name);
+                productNames.Add(product.name);
             foreach (Supplier supplier in accessor.GetAllSupplier())
                 supplierNames.Add(supplier.name);
             productListBox.DataSource = productNames;

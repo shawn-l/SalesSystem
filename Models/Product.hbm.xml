@@ -4,10 +4,11 @@
    namespace="Models">
 
 	<class name ="Product">
-		<id name="Id" column="Id"></id>
-		<property name ="Name"/>
-		<property name ="Price"/>
-		<property name="Quantity" />
-	
+		<id name="id" ></id>
+		<property name ="name"/>
+		<property name ="price"/>
+		<property name="stock" />
+    <property name="sale_quantity" />
+    <property name="amount" />
 	</class>
 </hibernate-mapping>
