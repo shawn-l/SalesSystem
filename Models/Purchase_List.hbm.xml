@@ -5,7 +5,7 @@
 
 	<class name ="PurchaseList" table ="purchase_lists">
 		<id name="id" >
-
+			<generator class ="native"/>
 		</id>
 		<property name ="quantity"/>
 		<property name ="price"/>

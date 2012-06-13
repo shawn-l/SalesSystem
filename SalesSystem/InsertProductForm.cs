@@ -21,26 +21,18 @@ namespace SalesSystem
         {
             Product product = new Product
             {
-                id = Int32.Parse(insertId.Text),
-                name = insertName.Text,
-                price = Double.Parse(insertPrice.Text),
-                stock = Int32.Parse(insertQuantity.Text)
+                name = name.Text,
+                price = Double.Parse(price.Text),
+                stock = Int32.Parse(stock.Text)
             };
             DbAccessor accessor = DbAccessor.Instance;
             accessor.CreateProduct(product);
+            MessageBox.Show("插入成功");
         }
 
-        private void search_Click(object sender, EventArgs e)
-        {
-            int search_id = Int32.Parse(searchId.Text);
-            DbAccessor accessor = DbAccessor.Instance;
-            Product product = accessor.GetProductById(search_id);
-            displayId.Text = product.id.ToString();
-            displayName.Text = product.name.ToString();
-            displayPrice.Text = product.price.ToString();
-            displayQuantity.Text = product.stock.ToString();
-        }
+  
 
+     
    
    
     }

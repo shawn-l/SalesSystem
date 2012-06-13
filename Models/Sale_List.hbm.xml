@@ -5,9 +5,10 @@
 
   <class name ="SaleList" table ="sale_lists">
     <id name="id" >
-
+		<generator class ="native"/>
     </id>
-    <property name ="salequantity"/>
+    <property name ="sale_quantity"/>
+	  <property name="sale_price"/>
     <property name ="product_id"/>
   </class>
 </hibernate-mapping>

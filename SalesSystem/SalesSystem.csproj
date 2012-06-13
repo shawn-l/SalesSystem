@@ -74,11 +74,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseListForm.cs">
+    <Compile Include="PurchaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PurchaseListForm.Designer.cs">
-      <DependentUpon>PurchaseListForm.cs</DependentUpon>
+    <Compile Include="PurchaseForm.Designer.cs">
+      <DependentUpon>PurchaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SaleDetialForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaleDetialForm.Designer.cs">
+      <DependentUpon>SaleDetialForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SaleForm.cs">
       <SubType>Form</SubType>
@@ -86,17 +92,23 @@
     <Compile Include="SaleForm.Designer.cs">
       <DependentUpon>SaleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatisticsForm.cs">
+    <Compile Include="ProductsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StatisticsForm.Designer.cs">
-      <DependentUpon>StatisticsForm.cs</DependentUpon>
+    <Compile Include="ProductsForm.Designer.cs">
+      <DependentUpon>ProductsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SupplierForm.cs">
+    <Compile Include="InsertSupplierForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SupplierForm.Designer.cs">
-      <DependentUpon>SupplierForm.cs</DependentUpon>
+    <Compile Include="InsertSupplierForm.Designer.cs">
+      <DependentUpon>InsertSupplierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SuppliersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SuppliersForm.Designer.cs">
+      <DependentUpon>SuppliersForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -113,17 +125,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="PurchaseListForm.resx">
-      <DependentUpon>PurchaseListForm.cs</DependentUpon>
+    <EmbeddedResource Include="PurchaseForm.resx">
+      <DependentUpon>PurchaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaleDetialForm.resx">
+      <DependentUpon>SaleDetialForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SaleForm.resx">
       <DependentUpon>SaleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatisticsForm.resx">
-      <DependentUpon>StatisticsForm.cs</DependentUpon>
+    <EmbeddedResource Include="ProductsForm.resx">
+      <DependentUpon>ProductsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SupplierForm.resx">
-      <DependentUpon>SupplierForm.cs</DependentUpon>
+    <EmbeddedResource Include="InsertSupplierForm.resx">
+      <DependentUpon>InsertSupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuppliersForm.resx">
+      <DependentUpon>SuppliersForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

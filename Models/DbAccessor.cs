@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Criterion;
 
 namespace Models
 {
@@ -91,9 +92,9 @@ namespace Models
                     session.Save(sale_list);
 
                     Product product = session.Get<Product>(sale_list.product_id);
-                    product.stock -= sale_list.salequantity;
-                    product.sale_quantity += sale_list.salequantity;
-                    product.amount += sale_list.salequantity * product.price;
+                    product.stock -= sale_list.sale_quantity;
+                    product.sale_quantity += sale_list.sale_quantity;
+                    product.amount += sale_list.sale_price * sale_list.sale_quantity;
                     session.Update(product);
 
                     session.Flush();
@@ -111,27 +112,30 @@ namespace Models
         {
             return session.Get<Product>(productId);
         }
+        public Product GetProductByName(string name)
+        {
+            return   session.CreateCriteria(typeof(Product)).Add(Restrictions.Eq("name", name)).List<Product>()[0];
+        }
         public IList<Product> GetAllProduct()
         {
             return session.CreateQuery("from Product").List<Product>();
         }
-        public Supplier GetSupplierById(int supplierId)
+        public Supplier GetSupplierByName(string name)
         {
-            return session.Get<Supplier>(supplierId);
+            return session.CreateCriteria(typeof(Supplier)).Add(Restrictions.Eq("name", name)).List<Supplier>()[0];
         }
         public IList<Supplier> GetAllSupplier()
         {
             return session.CreateQuery("from Supplier").List<Supplier>();
         }
-        public PurchaseList GetPurchaseListById(int purchaseId)
+        public IList<PurchaseList> GetPurchaseListsBySupplierId(int supplier_id)
         {
-            return session.Get<PurchaseList>(purchaseId);
+            return session.CreateCriteria(typeof(PurchaseList)).Add(Restrictions.Eq("supplier_id", supplier_id)).List<PurchaseList>();
         }
-        public SaleList GetSaleListById(int saleId)
+        public IList<SaleList> GetSaleListsByProductId(int product_id)
         {
-            return session.Get<SaleList>(saleId);
+            return session.CreateCriteria(typeof(SaleList)).Add(Restrictions.Eq("product_id", product_id)).List<SaleList>();
         }
-
         public void UpdateProduct(Product product)
         {
             using (ITransaction tx = session.BeginTransaction())

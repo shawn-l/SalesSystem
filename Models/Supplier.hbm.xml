@@ -4,7 +4,9 @@
    namespace="Models">
 
 	<class name ="Supplier" table="suppliers">
-		<id name="id" ></id>
+		<id name="id" >
+			<generator class ="native"/>
+		</id>
 		<property name ="name"/>
 
 	</class>

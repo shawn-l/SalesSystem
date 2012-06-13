@@ -12,3 +12,4 @@ SalesSystemTest/bin/Debug/*.pdb
 SalesSystemTest/bin/Debug/*.xml
 SalesSystemTest/bin/Release
 SalesSystemTest/obj
+SalesSystem/Models/hibernate.cfg.xml

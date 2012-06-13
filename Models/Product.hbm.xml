@@ -4,7 +4,9 @@
    namespace="Models">
 
 	<class name ="Product">
-		<id name="id" ></id>
+		<id name="id" >
+			<generator class ="native"/>
+		</id>
 		<property name ="name"/>
 		<property name ="price"/>
 		<property name="stock" />
