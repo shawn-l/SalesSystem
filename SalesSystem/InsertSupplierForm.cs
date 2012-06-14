@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Models;
-
+using NHibernate.Exceptions;
 namespace SalesSystem
 {
     public partial class InsertSupplierForm : Form
@@ -19,13 +19,27 @@ namespace SalesSystem
 
         private void insertbtn_Click(object sender, EventArgs e)
         {
-            Supplier supplier = new Supplier
-            {
-                name = SupplierNameText.Text,
-            };
+           
             DbAccessor accessor = DbAccessor.Instance;
-            accessor.CreateSupplier(supplier);
-            MessageBox.Show("添加成功");
+            try
+            {
+                if (SupplierNameText.Text == "")
+                    throw new FormatException();
+                Supplier supplier = new Supplier
+                {
+                    name = SupplierNameText.Text,
+                };
+                accessor.CreateSupplier(supplier);
+                MessageBox.Show("添加成功");
+            }
+            catch (FormatException) 
+            {
+                MessageBox.Show("输入格式有误");
+            }
+            catch (GenericADOException)
+            {
+                MessageBox.Show("存在同名的供应商，不能插入");
+            }
         }
     }
 }

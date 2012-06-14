@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Models;
 using System.Collections;
 
+
 namespace SalesSystem
 {
     public partial class PurchaseForm : Form
@@ -29,11 +30,12 @@ namespace SalesSystem
 
         private void purchaseInsert_Click(object sender, EventArgs e)
         {
-            DbAccessor accessor = DbAccessor.Instance;
-            Product product = accessor.GetProductByName(productListBox.SelectedItem.ToString());
-            Supplier supplier = accessor.GetSupplierByName(supplierListBox.SelectedItem.ToString());
             try
             {
+                DbAccessor accessor = DbAccessor.Instance;
+                Product product = accessor.GetProductByName(productListBox.SelectedItem.ToString());
+                Supplier supplier = accessor.GetSupplierByName(supplierListBox.SelectedItem.ToString());
+
                 PurchaseList purchase_list = new PurchaseList
                 {
                     price = Double.Parse(purchasePrice.Text),
@@ -44,8 +46,13 @@ namespace SalesSystem
                 accessor.CreatePurchaseList(purchase_list);
                 MessageBox.Show("添加成功");
             }
-            catch(FormatException) {
+            catch (FormatException)
+            {
                 MessageBox.Show("输入的字段格式有误");
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("还没选择对象");
             }
         }
     }

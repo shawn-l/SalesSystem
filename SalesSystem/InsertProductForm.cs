@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Models;
 using System.Text.RegularExpressions;
-
+using NHibernate.Exceptions;
 namespace SalesSystem
 {
     public partial class InsertProductForm : Form
@@ -22,6 +22,8 @@ namespace SalesSystem
         {
             try
             {
+                if (name.Text == "")
+                    throw new FormatException();
                 Product product = new Product
                 {
                     name = name.Text,
@@ -34,6 +36,10 @@ namespace SalesSystem
             catch (FormatException)
             {
                 MessageBox.Show("输入的字段格式有误");
+            }
+            catch (GenericADOException)
+            {
+                MessageBox.Show("存在同名商品，不能插入");
             }
         }
 

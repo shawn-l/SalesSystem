@@ -3,7 +3,7 @@
    assembly="Models"
    namespace="Models">
 
-	<class name ="PurchaseList" table ="purchase_lists">
+	<class name ="PurchaseList" table ="purchase_list">
 		<id name="id" >
 			<generator class ="native"/>
 		</id>

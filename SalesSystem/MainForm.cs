@@ -6,14 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Models;
 
 namespace SalesSystem
 {
     public partial class MainForm : Form
     {
         public MainForm()
-        {
-            InitializeComponent();
+        {         
+                InitializeComponent();         
         }
 
         private void button1_Click(object sender, EventArgs e)

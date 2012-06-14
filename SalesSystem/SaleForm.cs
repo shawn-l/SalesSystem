@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using Models;
+
 namespace SalesSystem
 {
     public partial class SaleForm : Form
@@ -20,10 +21,10 @@ namespace SalesSystem
 
         private void insert_Click(object sender, EventArgs e)
         {
-           
-            Product product = accessor.GetProductByName(productListBox.SelectedItem.ToString());
             try
             {
+                Product product = accessor.GetProductByName(productListBox.SelectedItem.ToString());
+
                 if (product.stock == 0)
                 {
                     MessageBox.Show("该商品没有库存");
@@ -44,6 +45,10 @@ namespace SalesSystem
             catch (FormatException)
             {
                 MessageBox.Show("输入的字段格式有误");
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("还没选择对象");
             }
         }
 

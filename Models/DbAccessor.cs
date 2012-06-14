@@ -5,6 +5,7 @@ using System.Text;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Criterion;
+using NHibernate.Exceptions;
 
 namespace Models
 {
@@ -30,43 +31,33 @@ namespace Models
 
         public void CreateProduct(Product product)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     session.Save(product);
                     session.Flush();
-                    tx.Commit();
                 }
-                catch (HibernateException)
+                catch (GenericADOException)
                 {
-                    tx.Rollback();
+                    session.Clear();
                     throw;
                 }
-            }
         }
 
         public void CreateSupplier(Supplier supplier)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     session.Save(supplier);
                     session.Flush();
-                    tx.Commit();
                 }
-                catch (HibernateException)
+                catch (GenericADOException)
                 {
-                    tx.Rollback();
+                    session.Clear();
                     throw;
                 }
-            }
         }
         public void CreatePurchaseList(PurchaseList purchase_list)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     session.Save(purchase_list);
@@ -77,19 +68,16 @@ namespace Models
                     session.Update(product);
 
                     session.Flush();
-                    tx.Commit();
                 }
                 catch (HibernateException)
                 {
-                    tx.Rollback();
+                    session.Clear();
                     throw;
                 }
-            }
+
         }
         public void CreateSaleList(SaleList sale_list)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     Product product = session.Get<Product>(sale_list.product_id);
@@ -104,14 +92,12 @@ namespace Models
                     session.Update(product);
 
                     session.Flush();
-                    tx.Commit();
                 }
                 catch (HibernateException)
                 {
-                    tx.Rollback();
+                    session.Clear();
                     throw;
                 }
-            }
         }
 
         public Product GetProductById(int productId)
@@ -142,110 +128,61 @@ namespace Models
         {
             return session.CreateCriteria(typeof(SaleList)).Add(Restrictions.Eq("product_id", product_id)).List<SaleList>();
         }
+      
         public void UpdateProduct(Product product)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     session.Update(product);
                     session.Flush();
-                    tx.Commit();
                 }
-                catch (HibernateException)
+                catch (GenericADOException)
                 {
-                    tx.Rollback();
+                   session.Clear();
                     throw;
                 }
-            }
         }
         public void UpdateSupplier(Supplier supplier)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     session.Update(supplier);
                     session.Flush();
-                    tx.Commit();
                 }
-                catch (HibernateException)
+                catch (GenericADOException)
                 {
-                    tx.Rollback();
+                    session.Clear();
                     throw;
                 }
-            }
         }
 
         public void DeleteProduct(Product product)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     session.Delete(product);
                     session.Flush();
-                    tx.Commit();
                 }
                 catch (HibernateException)
                 {
-                    tx.Rollback();
+                   session.Clear();
                     throw;
                 }
-            }
         }
         public void DeleteSupplier(Supplier supplier)
         {
-            using (ITransaction tx = session.BeginTransaction())
-            {
                 try
                 {
                     session.Delete(supplier);
                     session.Flush();
-                    tx.Commit();
                 }
                 catch (HibernateException)
                 {
-                    tx.Rollback();
+                   session.Clear();
                     throw;
                 }
-            }
-        }
-        public void DeletePurchaseList(PurchaseList purchase_list)
-        {
-            using (ITransaction tx = session.BeginTransaction())
-            {
-                try
-                {
-                    session.Delete(purchase_list);
-                    session.Flush();
-                    tx.Commit();
-                }
-                catch (HibernateException)
-                {
-                    tx.Rollback();
-                    throw;
-                }
-            }
         }
 
-        public void DeleteSale(SaleList sale_list)
-        {
-            using (ITransaction tx = session.BeginTransaction())
-            {
-                try
-                {
-                    session.Delete(sale_list);
-                    session.Flush();
-                    tx.Commit();
-                }
-                catch (HibernateException)
-                {
-                    tx.Rollback();
-                    throw;
-                }
-            }
-        }
 
 
 

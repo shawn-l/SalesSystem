@@ -43,23 +43,29 @@ namespace SalesSystem
             listView1.Columns.Add("售价");
             listView1.Columns.Add("卖出数量");
             listView1.Columns.Add("总价");
-
-            Product product= accessor.GetProductByName(this.listBox1.SelectedItem.ToString());
-            foreach (SaleList sale in accessor.GetSaleListsByProductId(product.id))
+            try
             {
-                ListViewItem li = new ListViewItem();
-                li.SubItems[0].Text = sale.sale_price.ToString();
-                li.SubItems.Add(sale.sale_quantity.ToString());
-                Double sale_amount = sale.sale_price * sale.sale_quantity;
-                amount += sale_amount;
-                quantity += sale.sale_quantity;
-                profit += (sale.sale_price - sale.purchase_price) * sale.sale_quantity;
-                li.SubItems.Add(sale_amount.ToString());
-                listView1.Items.Add(li);
+                Product product = accessor.GetProductByName(this.listBox1.SelectedItem.ToString());
+                foreach (SaleList sale in accessor.GetSaleListsByProductId(product.id))
+                {
+                    ListViewItem li = new ListViewItem();
+                    li.SubItems[0].Text = sale.sale_price.ToString();
+                    li.SubItems.Add(sale.sale_quantity.ToString());
+                    Double sale_amount = sale.sale_price * sale.sale_quantity;
+                    amount += sale_amount;
+                    quantity += sale.sale_quantity;
+                    profit += (sale.sale_price - sale.purchase_price) * sale.sale_quantity;
+                    li.SubItems.Add(sale_amount.ToString());
+                    listView1.Items.Add(li);
+                }
+                sales_quantity.Text = quantity.ToString() + "件";
+                sales_amount.Text = amount.ToString() + "元";
+                sale_profit.Text = profit.ToString() + "元";
             }
-            sales_quantity.Text = quantity.ToString() + "件";
-            sales_amount.Text = amount.ToString() + "元";
-            sale_profit.Text = profit.ToString() + "元";
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("还没选择对象");
+            }
         }
 
 

@@ -3,7 +3,7 @@
    assembly="Models"
    namespace="Models">
 
-	<class name ="Supplier" table="suppliers">
+	<class name ="Supplier" >
 		<id name="id" >
 			<generator class ="native"/>
 		</id>
