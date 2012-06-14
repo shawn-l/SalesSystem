@@ -32,15 +32,21 @@ namespace SalesSystem
             DbAccessor accessor = DbAccessor.Instance;
             Product product = accessor.GetProductByName(productListBox.SelectedItem.ToString());
             Supplier supplier = accessor.GetSupplierByName(supplierListBox.SelectedItem.ToString());
-            PurchaseList purchase_list = new PurchaseList
+            try
             {
-                price = Double.Parse(purchasePrice.Text),
-                quantity = Int32.Parse(purchaseQuantity.Text),
-                product_id = product.id,
-                supplier_id = supplier.id
-            };
-            accessor.CreatePurchaseList(purchase_list);
-            MessageBox.Show("添加成功");
+                PurchaseList purchase_list = new PurchaseList
+                {
+                    price = Double.Parse(purchasePrice.Text),
+                    quantity = Int32.Parse(purchaseQuantity.Text),
+                    product_id = product.id,
+                    supplier_id = supplier.id
+                };
+                accessor.CreatePurchaseList(purchase_list);
+                MessageBox.Show("添加成功");
+            }
+            catch(FormatException) {
+                MessageBox.Show("输入的字段格式有误");
+            }
         }
     }
 }

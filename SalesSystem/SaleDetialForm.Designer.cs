@@ -32,12 +32,14 @@
             this.button2 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.sales_quantity = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.sales_amount = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.sales_quantity = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.sale_profit = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -49,14 +51,14 @@
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Location = new System.Drawing.Point(21, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(130, 238);
+            this.groupBox2.Size = new System.Drawing.Size(130, 258);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "全部商品";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(42, 209);
+            this.button2.Location = new System.Drawing.Point(41, 229);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(41, 23);
             this.button2.TabIndex = 0;
@@ -70,11 +72,13 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(18, 22);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(86, 184);
+            this.listBox1.Size = new System.Drawing.Size(86, 196);
             this.listBox1.TabIndex = 15;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.sale_profit);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.sales_amount);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.sales_quantity);
@@ -82,19 +86,44 @@
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Location = new System.Drawing.Point(177, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 238);
+            this.groupBox1.Size = new System.Drawing.Size(207, 258);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "销售信息";
-  
             // 
-            // listView1
+            // sales_amount
             // 
-            this.listView1.Location = new System.Drawing.Point(6, 14);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(183, 147);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.sales_amount.AutoSize = true;
+            this.sales_amount.Location = new System.Drawing.Point(96, 214);
+            this.sales_amount.Name = "sales_amount";
+            this.sales_amount.Size = new System.Drawing.Size(0, 12);
+            this.sales_amount.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 214);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 12);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "总售价:";
+            // 
+            // sales_quantity
+            // 
+            this.sales_quantity.AutoSize = true;
+            this.sales_quantity.Location = new System.Drawing.Point(96, 194);
+            this.sales_quantity.Name = "sales_quantity";
+            this.sales_quantity.Size = new System.Drawing.Size(0, 12);
+            this.sales_quantity.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 194);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "售出总数:";
             // 
             // groupBox3
             // 
@@ -106,45 +135,36 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "销售单";
             // 
-            // label1
+            // listView1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 194);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "售出总数:";
+            this.listView1.Location = new System.Drawing.Point(6, 14);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(183, 147);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // sales_quantity
+            // label3
             // 
-            this.sales_quantity.AutoSize = true;
-            this.sales_quantity.Location = new System.Drawing.Point(96, 194);
-            this.sales_quantity.Name = "sales_quantity";
-            this.sales_quantity.Size = new System.Drawing.Size(0, 12);
-            this.sales_quantity.TabIndex = 3;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 234);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "利润:";
             // 
-            // label2
+            // sale_profit
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 214);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "总售价:";
-            // 
-            // sales_amount
-            // 
-            this.sales_amount.AutoSize = true;
-            this.sales_amount.Location = new System.Drawing.Point(96, 214);
-            this.sales_amount.Name = "sales_amount";
-            this.sales_amount.Size = new System.Drawing.Size(0, 12);
-            this.sales_amount.TabIndex = 5;
+            this.sale_profit.AutoSize = true;
+            this.sale_profit.Location = new System.Drawing.Point(96, 234);
+            this.sale_profit.Name = "sale_profit";
+            this.sale_profit.Size = new System.Drawing.Size(0, 12);
+            this.sale_profit.TabIndex = 7;
             // 
             // SaleDetialForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 262);
+            this.ClientSize = new System.Drawing.Size(396, 282);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Name = "SaleDetialForm";
@@ -170,5 +190,7 @@
         private System.Windows.Forms.Label sales_quantity;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label sales_amount;
+        private System.Windows.Forms.Label sale_profit;
+        private System.Windows.Forms.Label label3;
     }
 }

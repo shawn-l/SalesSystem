@@ -10,5 +10,6 @@
     <property name ="sale_quantity"/>
 	  <property name="sale_price"/>
     <property name ="product_id"/>
+	  <property name="purchase_price"/>
   </class>
 </hibernate-mapping>

@@ -10,20 +10,22 @@ namespace Models
 {
     public class DbAccessor
     {
-        private ISession session;
+        private  ISession session;
         private static DbAccessor instance = null;
         private DbAccessor()
         {
             session = (new Configuration()).Configure().BuildSessionFactory().OpenSession();
         }
-       
+
         public static DbAccessor Instance 
         {
-            get {
-                if (  instance == null )
+            get
+            {
+                if (instance == null)
                     instance = new DbAccessor();
                 return instance;
             }
+        
         }
 
         public void CreateProduct(Product product)
@@ -71,6 +73,7 @@ namespace Models
 
                     Product product = session.Get<Product>(purchase_list.product_id);
                     product.stock += purchase_list.quantity;
+                    product.purchase_price = purchase_list.price;
                     session.Update(product);
 
                     session.Flush();
@@ -89,12 +92,15 @@ namespace Models
             {
                 try
                 {
-                    session.Save(sale_list);
-
                     Product product = session.Get<Product>(sale_list.product_id);
+                    int old_stock = product.stock;
                     product.stock -= sale_list.sale_quantity;
-                    product.sale_quantity += sale_list.sale_quantity;
-                    product.amount += sale_list.sale_price * sale_list.sale_quantity;
+                    if (product.stock < 0)
+                    {
+                        product.stock = 0;
+                        sale_list.sale_quantity = old_stock;
+                    }
+                    session.Save(sale_list);
                     session.Update(product);
 
                     session.Flush();

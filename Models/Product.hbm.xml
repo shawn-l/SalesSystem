@@ -10,7 +10,6 @@
 		<property name ="name"/>
 		<property name ="price"/>
 		<property name="stock" />
-    <property name="sale_quantity" />
-    <property name="amount" />
+		<property name="purchase_price"/>
 	</class>
 </hibernate-mapping>

@@ -39,6 +39,9 @@ namespace SalesSystem
             accessor.DeleteProduct(product);
             listBox1.Items.Remove(this.listBox1.SelectedItem);
             MessageBox.Show("删除成功");
+            name.Text = "";
+            price.Text = "";
+            stock.Text = "";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -51,14 +54,26 @@ namespace SalesSystem
 
         private void button3_Click(object sender, EventArgs e)
         {
-            product.name = name.Text;
-            product.price = Double.Parse(price.Text);
-            product.stock = Int32.Parse(stock.Text);
-            accessor.UpdateProduct(product);
-            listBox1.Items.Clear();
-            AddDataToListBox();
-            MessageBox.Show("更新成功");
+            try
+            {
+                product.name = name.Text;
+                product.price = Double.Parse(price.Text);
+                product.stock = Int32.Parse(stock.Text);
+                accessor.UpdateProduct(product);
+                listBox1.Items.Clear();
+                AddDataToListBox();
+                MessageBox.Show("更新成功");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("输入的字段格式有误");
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("还未选中商品");
+            }
         }
+
 
 
 

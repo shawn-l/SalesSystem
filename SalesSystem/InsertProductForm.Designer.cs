@@ -32,8 +32,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.price = new System.Windows.Forms.TextBox();
             this.name = new System.Windows.Forms.TextBox();
-            this.stock = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.insert = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -70,22 +68,6 @@
             this.name.Size = new System.Drawing.Size(140, 21);
             this.name.TabIndex = 1;
             // 
-            // stock
-            // 
-            this.stock.Location = new System.Drawing.Point(101, 104);
-            this.stock.Name = "stock";
-            this.stock.Size = new System.Drawing.Size(140, 21);
-            this.stock.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(48, 107);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "库存";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -97,7 +79,7 @@
             // 
             // insert
             // 
-            this.insert.Location = new System.Drawing.Point(82, 153);
+            this.insert.Location = new System.Drawing.Point(83, 137);
             this.insert.Name = "insert";
             this.insert.Size = new System.Drawing.Size(75, 23);
             this.insert.TabIndex = 4;
@@ -109,11 +91,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 212);
+            this.ClientSize = new System.Drawing.Size(253, 195);
             this.Controls.Add(this.insert);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.stock);
             this.Controls.Add(this.name);
             this.Controls.Add(this.price);
             this.Controls.Add(this.label3);
@@ -131,8 +111,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox name;
         private System.Windows.Forms.TextBox price;
-        private System.Windows.Forms.TextBox stock;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button insert;
     }

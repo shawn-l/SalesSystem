@@ -12,6 +12,7 @@ namespace SalesSystemTest
     [TestClass]
     public class UnitTestModels
     {
+        DbAccessor accessor;
         public UnitTestModels()
         {
             //
@@ -58,19 +59,24 @@ namespace SalesSystemTest
         // public void MyTestCleanup() { }
         //
         #endregion
-
+        [TestInitialize()]
+        public void SetUp() 
+        {
+            accessor = DbAccessor.Instance;
+        }
         [TestMethod]
         public void TestCRUDAboutProudctModel()
         {
 
-            DbAccessor accessor = DbAccessor.Instance;
-            Product product = new Product { name = "name", price = 3.5, stock = 100, sale_quantity = 0, amount = 0.0};
+            Product product = new Product { name = "name", price = 3.5};
+
             accessor.CreateProduct(product);
             Product dbProduct = accessor.GetProductByName(product.name);
-            
+
             Assert.AreEqual(product.name, dbProduct.name);
             Assert.AreEqual(product.price, dbProduct.price);
-            Assert.AreEqual(product.stock, dbProduct.stock);
+            Assert.AreEqual(0, dbProduct.stock);
+            Assert.AreEqual(0.0, dbProduct.purchase_price);
 
             product.name = "change_name";
             accessor.UpdateProduct(product);
@@ -82,9 +88,7 @@ namespace SalesSystemTest
         [TestMethod]
         public void TestCRUDAboutSupplierModel()
         {
-     
-            DbAccessor accessor = DbAccessor.Instance;
-            Supplier supplier= new Supplier { name = "test_supplier" };
+            Supplier supplier = new Supplier { name = "test_supplier" };
             accessor.CreateSupplier(supplier);
 
             Supplier dbSupplier = accessor.GetSupplierByName(supplier.name);
@@ -94,21 +98,20 @@ namespace SalesSystemTest
             supplier.name = "change_name";
             accessor.UpdateSupplier(supplier);
             dbSupplier = accessor.GetSupplierByName(supplier.name);
-            Assert.AreEqual(supplier.name,  dbSupplier.name);
+            Assert.AreEqual(supplier.name, dbSupplier.name);
 
-            accessor.DeleteSupplier(supplier);     
+            accessor.DeleteSupplier(supplier);
         }
         [TestMethod]
-        public void TestCRUDAboutPurchaseListModel() {
-            DbAccessor accessor = DbAccessor.Instance;
-            
-            Product product = new Product {  name = "test_prodcut", price = 3.5, stock = 100 };
+        public void TestCRUDAboutPurchaseListModel()
+        {
+            Product product = new Product { name = "test_prodcut", price = 3.5 };
             accessor.CreateProduct(product);
-            
+
             Supplier supplier = new Supplier { name = "test_supplier" };
             accessor.CreateSupplier(supplier);
-           
-            PurchaseList purchase = new PurchaseList { quantity = 100, price = 10.5, product_id=product.id, supplier_id = supplier.id };
+
+            PurchaseList purchase = new PurchaseList { quantity = 100, price = 10.5, product_id = product.id, supplier_id = supplier.id };
             accessor.CreatePurchaseList(purchase);
 
             PurchaseList dbPurchase_list = accessor.GetPurchaseListsBySupplierId(supplier.id)[0];
@@ -118,30 +121,28 @@ namespace SalesSystemTest
             Assert.AreEqual(10.5, dbPurchase_list.price);
             Assert.AreEqual(supplier.id, dbPurchase_list.supplier_id);
 
-            Assert.AreEqual(200, dbProduct.stock);
+            Assert.AreEqual(100, dbProduct.stock);
+            Assert.AreEqual(10.5, dbProduct.purchase_price);
 
             accessor.DeleteProduct(product);
             accessor.DeleteSupplier(supplier);
-   
+
         }
         [TestMethod]
         public void TestCRUDAbouSaleModel()
         {
-            DbAccessor accessor = DbAccessor.Instance;
-
-            Product product = new Product { name = "test_name", price = 3.5, stock = 100, sale_quantity = 0, amount = 0.0 };
+            Product product = new Product { name = "test_name", price = 3.5, stock = 100, purchase_price = 2.5 };
             accessor.CreateProduct(product);
 
-            SaleList sale = new SaleList {sale_quantity = 5, product_id = product.id,  sale_price = product.price };
+            SaleList sale = new SaleList { sale_quantity = 5, product_id = product.id, sale_price = product.price, purchase_price = product.purchase_price };
             accessor.CreateSaleList(sale);
 
             SaleList dbSale_list = accessor.GetSaleListsByProductId(product.id)[0];
             Product dbProduct = accessor.GetProductByName(product.name);
 
             Assert.AreEqual(5, dbSale_list.sale_quantity);
-            Assert.AreEqual(5, dbProduct.sale_quantity);
-            Assert.AreEqual(dbSale_list.sale_quantity * dbProduct.price, dbProduct.amount);
             Assert.AreEqual(dbProduct.id, dbSale_list.product_id);
+            Assert.AreEqual(dbProduct.purchase_price, dbSale_list.purchase_price);
 
             Assert.AreEqual(95, dbProduct.stock);
 
@@ -150,10 +151,8 @@ namespace SalesSystemTest
         [TestMethod]
         public void TestGetPurchaseListForSupplier()
         {
-            DbAccessor accessor = DbAccessor.Instance;
-
-            Product product = new Product { name = "test_name", price = 3.5, stock = 100, sale_quantity = 0, amount = 0.0 };
-            Product another_product = new Product { name = "another_name", price = 3.5, stock = 100, sale_quantity = 0, amount = 0.0 };
+            Product product = new Product { name = "test_name", price = 3.5, stock = 100 };
+            Product another_product = new Product { name = "another_name", price = 3.5, stock = 100 };
             accessor.CreateProduct(product);
             accessor.CreateProduct(another_product);
 
@@ -170,6 +169,22 @@ namespace SalesSystemTest
             accessor.DeleteProduct(product);
             accessor.DeleteProduct(another_product);
             accessor.DeleteSupplier(supplier);
+        }
+        [TestMethod]
+        public void TestNotEnoughtProductToSale()
+        {
+            Product product = new Product { name = "text_product", price = 2.5, stock = 30, purchase_price = 2 };
+            accessor.CreateProduct(product);
+            SaleList sale = new SaleList { product_id = product.id, sale_price = product.price, purchase_price = product.purchase_price, sale_quantity = 40 };
+            accessor.CreateSaleList(sale);
+
+            Product dbProduct = accessor.GetProductById(product.id);
+            SaleList dbSale = accessor.GetSaleListsByProductId(product.id)[0];
+
+            Assert.AreEqual(0, dbProduct.stock);
+            Assert.AreEqual(30, dbSale.sale_quantity);
+
+            accessor.DeleteProduct(product);
         }
     }
 }

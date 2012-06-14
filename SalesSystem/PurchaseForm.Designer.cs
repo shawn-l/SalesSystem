@@ -54,7 +54,7 @@
             // 
             this.purchasePrice.Location = new System.Drawing.Point(150, 61);
             this.purchasePrice.Name = "purchasePrice";
-            this.purchasePrice.Size = new System.Drawing.Size(100, 21);
+            this.purchasePrice.Size = new System.Drawing.Size(120, 21);
             this.purchasePrice.TabIndex = 4;
             // 
             // label4
@@ -70,7 +70,7 @@
             // 
             this.purchaseQuantity.Location = new System.Drawing.Point(150, 99);
             this.purchaseQuantity.Name = "purchaseQuantity";
-            this.purchaseQuantity.Size = new System.Drawing.Size(79, 21);
+            this.purchaseQuantity.Size = new System.Drawing.Size(120, 21);
             this.purchaseQuantity.TabIndex = 6;
             // 
             // label5

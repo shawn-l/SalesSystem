@@ -22,13 +22,29 @@ namespace SalesSystem
         {
            
             Product product = accessor.GetProductByName(productListBox.SelectedItem.ToString());
-            SaleList sale = new SaleList
+            try
             {
-                product_id = product.id,
-                sale_quantity = Int32.Parse(quantity.Text),
-                sale_price = product.price
-            };
-            accessor.CreateSaleList(sale);
+                if (product.stock == 0)
+                {
+                    MessageBox.Show("该商品没有库存");
+                    return;
+                }
+                if (product.stock - Int32.Parse(quantity.Text) < 0)
+                    MessageBox.Show("库存不足，只能销售" + product.stock + "件商品");
+                SaleList sale = new SaleList
+                {
+                    product_id = product.id,
+                    sale_quantity = Int32.Parse(quantity.Text),
+                    sale_price = product.price,
+                    purchase_price = product.purchase_price
+                };
+                accessor.CreateSaleList(sale);
+                MessageBox.Show("添加成功");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("输入的字段格式有误");
+            }
         }
 
         private void SaleForm_Load(object sender, EventArgs e)
@@ -38,5 +54,6 @@ namespace SalesSystem
                 productNames.Add(product.name);
             productListBox.DataSource = productNames;
         }
+
     }
 }

@@ -34,6 +34,7 @@ namespace SalesSystem
         {
             int quantity = 0;
             double amount = 0.0;
+            double profit = 0.0;
             listView1.Columns.Clear();
             listView1.Items.Clear();
             this.listView1.GridLines = true;
@@ -52,11 +53,13 @@ namespace SalesSystem
                 Double sale_amount = sale.sale_price * sale.sale_quantity;
                 amount += sale_amount;
                 quantity += sale.sale_quantity;
+                profit += (sale.sale_price - sale.purchase_price) * sale.sale_quantity;
                 li.SubItems.Add(sale_amount.ToString());
                 listView1.Items.Add(li);
             }
-            sales_quantity.Text = quantity.ToString();
-            sales_amount.Text = amount.ToString();
+            sales_quantity.Text = quantity.ToString() + "件";
+            sales_amount.Text = amount.ToString() + "元";
+            sale_profit.Text = profit.ToString() + "元";
         }
 
 

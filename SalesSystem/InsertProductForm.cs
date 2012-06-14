@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Models;
+using System.Text.RegularExpressions;
 
 namespace SalesSystem
 {
@@ -19,21 +20,22 @@ namespace SalesSystem
 
         private void insert_Click(object sender, EventArgs e)
         {
-            Product product = new Product
+            try
             {
-                name = name.Text,
-                price = Double.Parse(price.Text),
-                stock = Int32.Parse(stock.Text)
-            };
-            DbAccessor accessor = DbAccessor.Instance;
-            accessor.CreateProduct(product);
-            MessageBox.Show("插入成功");
+                Product product = new Product
+                {
+                    name = name.Text,
+                    price = Double.Parse(price.Text)
+                };
+                DbAccessor accessor = DbAccessor.Instance;
+                accessor.CreateProduct(product);
+                MessageBox.Show("插入成功");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("输入的字段格式有误");
+            }
         }
 
-  
-
-     
-   
-   
     }
 }
