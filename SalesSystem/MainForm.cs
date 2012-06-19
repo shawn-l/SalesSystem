@@ -13,8 +13,18 @@ namespace SalesSystem
     public partial class MainForm : Form
     {
         public MainForm()
-        {         
-                InitializeComponent();         
+        {
+            try
+            {
+                DbAccessor accessor = DbAccessor.Instance;
+                InitializeComponent();  
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("数据库不能连接");
+                return;
+            }
+                       
         }
 
         private void button1_Click(object sender, EventArgs e)
